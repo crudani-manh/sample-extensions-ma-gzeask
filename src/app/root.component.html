@@ -1,0 +1,7 @@
+<h2>Sample Pages for Iframe-Extensions of Customer-Engagement UI</h2>
+<ol>
+	<li *ngFor="let page of samplePages">
+		<div><label>{{page.title}}</label></div>
+    <div><a [href]="page.url">{{page.url}}</a></div>
+  </li>
+</ol>

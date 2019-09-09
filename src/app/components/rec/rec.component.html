@@ -1,0 +1,26 @@
+<h4>Recommended Items</h4>
+
+<div class="cards" *ngIf="recItems">
+	<div class="recItem">
+		<li *ngFor="let recItem of recItems">
+			<mat-card class="item-card">
+
+				<mat-card-header class="oneLine">
+					<mat-card-title class="fitHeaderText">{{recItem.id}}</mat-card-title>
+				</mat-card-header>
+        
+				<img id = "image" mat-card-image class="recommendedItemImage" src={{recItem.url}}>
+         
+        <mat-card-content>
+          <p class="fitBodyText">{{recItem.shortDescription}}</p>
+        </mat-card-content>
+
+       <button class = "button" *ngIf = "recItems"  (click)="buttonClicked(recItem.id)">
+          <span>Add to Cart</span>
+        </button>
+      
+      </mat-card>
+    </li>
+    
+  </div>
+</div>

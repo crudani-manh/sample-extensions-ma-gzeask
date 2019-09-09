@@ -1,0 +1,30 @@
+.star-rating-container {
+  padding: 0px 0px 0px;
+  text-align: left;
+}
+.star-rating, .star-rating-display {
+  display: inline-block;
+  position: relative; 
+  font-size: 34px;
+}
+.stars, .stars-background {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: default;
+  background-color: transparent;
+  color: #b4b7b9;
+  letter-spacing: -3px;
+}
+.stars.stars, .stars-background.stars {
+  color: #4d5357;
+}
+.stars .transparent, .stars-background .transparent {
+  color: transparent;
+}
+.stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}

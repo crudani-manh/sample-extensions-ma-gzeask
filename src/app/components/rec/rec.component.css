@@ -1,0 +1,96 @@
+h4 {
+  padding: 3px;
+  margin: 0px;
+  padding-left: 7px;
+}
+p {
+  font-family: Lato;
+}
+/*This is used for each of the mat-cards for the recommended
+item cards.*/
+li {
+  list-style-type: none;
+  /*width: 150px;
+  height: 150px;*/
+  float: left;
+  margin: 4px;
+  padding: 4px;
+  color: black;
+  display: block;
+  position: relative;
+  background-color: none;
+}
+.recItem {
+  clear: both;
+  float: left;
+}
+.recommendedItemImage {
+  /*Line up the image*/
+  margin-left: 0px;
+  margin-right: 8px;
+  /*Resizing*/
+  height: 60px;
+  width: auto;
+  object-fit:scale-up;
+  display:inline-block;
+}
+/*Use to adjust the dimensions of the cards.*/
+.item-card {
+  max-width: 130px;
+  max-height: 125px;
+
+  min-width: 130px;
+  min-height: 125px;
+}
+.oneLine {
+  white-space:nowrap;
+  text-indent: -10%;
+}
+.fitHeaderText {
+  font-size: .675rem;
+}
+.fitBodyText {
+  float: top;
+  font-size: .55rem;
+  white-space: wrap;
+}
+.button {
+  float: none;
+  display: inline-block;
+  border-radius: 13px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 12px;
+  padding: 5px;
+  width: 120px;
+  transition: all 1.00s;
+  cursor: pointer;
+  margin: 0px;
+  margin-left: 6px;
+}
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 1.00s;
+}
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 1.00s;
+}
+.button:hover span {
+  padding-right: 15px;
+}
+.button:hover span:after {
+  opacity: 1.0;
+  right: 0;
+}
+#image {
+  float:left;
+}

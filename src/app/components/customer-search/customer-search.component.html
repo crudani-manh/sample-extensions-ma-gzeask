@@ -1,0 +1,48 @@
+<form #form="ngForm" class="search-form" (ngSubmit)="onSearch()">
+	<div class="form-group">
+		<mat-form-field class="field-full-width">
+			<input matInput
+      class="form-control"
+      [(ngModel)]="formModel.FirstName" 
+      name="customerId"
+      placeholder='First Name' 
+      type="text">
+    </mat-form-field>
+  </div>
+  <div class="form-group">
+		<mat-form-field class="field-full-width">
+			<input matInput
+      class="form-control"
+      [(ngModel)]="formModel.LastName" 
+      name="LastName"
+      placeholder='Last Name' 
+      type="text">
+    </mat-form-field>
+  </div>
+  <div class="form-group">
+		<mat-form-field class="field-full-width">
+			<input matInput
+      class="form-control"
+      [(ngModel)]="formModel.Email" 
+      name="Email"
+      placeholder='Email' 
+      type="email">
+    </mat-form-field>
+  </div>
+  <div>
+    OR
+  </div>
+  <div class="form-group">
+		<mat-form-field class="field-full-width">
+			<input matInput
+      class="form-control"
+      [(ngModel)]="formModel.Phone" 
+      name="Phone"
+      placeholder='Phone' 
+      type="number">
+    </mat-form-field>
+  </div>
+  <div>  
+    <button mat-flat-button color="primary" type="submit" [disabled]="!form.form.valid">Search</button>
+  </div>
+</form>

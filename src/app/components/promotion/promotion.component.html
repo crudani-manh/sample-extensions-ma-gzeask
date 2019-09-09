@@ -1,0 +1,56 @@
+<div id="ma-23">
+
+  <div id="template-d" class="template">
+
+   <!-- <section class="hero">
+    <img src="https://www.visitmonaco.com/ImageRepository/PageListe/207df135-6a53-4b16-ae6c-d99b9e5c4aa5/Slider/2-shooping.jpg?Width=1700&Height=850" alt="">
+    <div class="content">
+     <h1>Here are the <span>discounts</span> you are eligible for!</h1>
+     <h2>#<span>DEALS</span>FOR<span>DAYS</span></h2>
+    </div>
+   </section> -->
+
+   <section class="grid">
+      <ul> 
+        <ul>
+
+            <li *ngFor="let promo of promotionArray" class="deal col span_1_of_3">
+            <div class="deal-container">
+              <h4 class="deal-title">{{promo.title}}</h4>
+              <figure class="product"><img src={{promo.image}} alt=""></figure><figcaption>{{promo.caption}}</figcaption>
+              <p class="deal-cashback">&nbsp;</p>
+              <a *ngIf = "promo.button" class="button deal-btn" href="">Buy Now</a>
+              <p style="height:35px; margin: 0 0 10px;">&nbsp;</p>
+            </div>
+            </li>
+
+
+        <!-- <li class="deal col span_1_of_3">
+         <div class="deal-container deal-over">
+          <h4 class="deal-title">$15 Off +$75</h4>
+          <figure class="product"><img src="https://www.dealsworthy.com.au/wp-content/uploads/2018/09/15-dollars-off.png" alt=""></figure><figcaption>Get $15 off your purchase if you buy more than $75 worth of products before tax and apply this this code at checkout: 15OFF75</figcaption>
+          <p class="deal-cashback">&nbsp;</p>
+          <p style="height:35px; margin: 0 0 10px;">&nbsp;</p>
+         </div>
+        </li>
+
+        <li class="deal col span_1_of_3">
+         <div class="deal-container">
+          <h4 class="deal-title">$25 Off +$150</h4>
+          <a href=""><figure class="product"><img src="https://theofw.com/wp-content/uploads/2015/04/25-off.png" alt=""></figure><figcaption>Get $25 off your purchase if you buy more than $150 worth of products before tax and apply this this code at checkout: 25OFF150</figcaption></a>
+          <p class="deal-cashback">$25 <em>Cashback</em></p>
+          <a class="button deal-btn" href="">Buy Now</a>
+         </div>
+        </li> -->
+
+
+      </ul>
+    </ul>
+  </section>
+
+
+
+   <div class="clear"></div>
+  </div>
+  
+</div>

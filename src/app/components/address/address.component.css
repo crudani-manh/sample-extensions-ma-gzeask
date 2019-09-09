@@ -1,0 +1,92 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,900,700,500);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css);
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 200;
+  src: url(https://fonts.gstatic.com/s/materialicons/v47/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal; 
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+#btn, #addButton {
+  background-color: rgb(81, 152, 233);
+}
+
+#wrongZip {
+  color: red;
+  text-indent: 10px;
+  font-size: 12px;
+  visibility: hidden;
+}
+
+#first_name {
+   margin-top: 15px;
+   margin-bottom: -10px;
+   height: 20px;
+}
+
+#last_name {
+   margin-bottom: -10px;
+   height: 20px;
+}
+
+#address {
+  margin-bottom: -10px; 
+  height: 20px;
+}
+
+#town {
+  margin-bottom: -20px;
+  height: 20px;
+}
+
+#state {
+  margin-bottom: -10px;
+  height: 40px;
+}
+
+#country {
+   margin-bottom: -10px;
+   height: 40px;
+}
+
+#zip-code {
+   margin-bottom: -10px;
+   height: 20px;
+   margin-top: 20px;
+}
+
+#email {
+   margin-bottom: 10px;
+   height: 20px;
+}
+
+#phone-number {
+   height: 20px;
+}
+
+#addButton {
+  margin: 10px;
+  margin-top: 0px;
+}
+
+#btn {
+  margin: 10px;
+  margin-top: 0px;
+}
