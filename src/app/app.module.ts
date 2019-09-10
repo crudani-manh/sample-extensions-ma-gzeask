@@ -19,9 +19,7 @@ import { PromotionComponent } from './components/promotion/promotion.component';
 import { ExampleComponent } from './components/example/example.component';
 import { CustomerSearchComponent } from './components/customer-search/customer-search.component';
 import { ShipmentTabComponent } from './components/shipment-tab/shipment-tab.component';
-import { AddCreditCardComponent } from './add-credit-card/add-credit-card.component';
-
-
+import { AddCreditCardComponent } from './components/add-credit-card/add-credit-card.component';
 
 export const sampleIframeExtns = [    
   RecComponent, 
