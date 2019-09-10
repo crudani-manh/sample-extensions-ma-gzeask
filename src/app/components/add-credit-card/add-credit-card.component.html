@@ -1,0 +1,62 @@
+<form #billingAddressForm="ngForm">
+  <div>
+    <div>
+      <mat-checkbox class="dark-checkbox-style text-normal" [(ngModel)]="isSameAsShipping"
+          (change)="changeBillingAddress()" name="isSameAsShipping">
+          {{'SAME_AS_SHIPPING_ADDRESS_UC' | translate:bundle}}
+      </mat-checkbox>
+    </div>
+  </div>
+  <div>
+    <mat-form-field class="form-field">
+      <input matInput [(ngModel)]="address.FirstName" name="firstName" maxlength="100" #firstName="ngModel" autocomplete="nope" required
+        placeholder="{{'First Name'}}">
+    </mat-form-field>
+    <mat-form-field class="form-field">
+      <input matInput [(ngModel)]="address.LastName" name="lastName" maxlength="100" #firstName="ngModel" autocomplete="nope" required
+        placeholder="{{'Last Name'}}">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="form-field-1">
+      <input matInput [(ngModel)]="address.Address1" name="address1" maxlength="100" #firstName="ngModel" autocomplete="nope" required
+        placeholder="{{'street'}}">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="form-field-1">
+      <input matInput [(ngModel)]="address.Address2" name="address2" maxlength="100" #firstName="ngModel" autocomplete="nope" required
+        placeholder="{{'apt'}}">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="form-field">
+      <input matInput [(ngModel)]="address.City" name="city" maxlength="100" #firstName="ngModel" autocomplete="nope" required
+        placeholder="{{'City'}}">
+    </mat-form-field>
+    <mat-form-field class="form-field">
+      <input matInput [(ngModel)]="address.State" name="state" maxlength="100" #firstName="ngModel" autocomplete="nope" required
+        placeholder="{{'State'}}">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="form-field">
+      <input matInput [(ngModel)]="address.Country" name="country" maxlength="100" #firstName="ngModel" autocomplete="nope" required
+        placeholder="{{'Country'}}">
+    </mat-form-field>
+    <mat-form-field class="form-field">
+      <input matInput [(ngModel)]="address.PostalCode" name="postalCode" maxlength="100" #firstName="ngModel" autocomplete="nope" required
+        placeholder="{{'Postal Code'}}">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="form-field">
+      <input matInput [(ngModel)]="address.Email" name="email" maxlength="100" #firstName="ngModel" autocomplete="nope"
+        placeholder="{{'Email'}}">
+    </mat-form-field>
+    <mat-form-field class="form-field">
+      <input matInput [(ngModel)]="address.Phone" name="phone" maxlength="100" #firstName="ngModel" autocomplete="nope" 
+        placeholder="{{'Phone'}}">
+    </mat-form-field>
+  </div>
+</form>
