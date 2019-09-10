@@ -15,10 +15,12 @@ export class PaymentService {
 
   getCardTypes(selectedOrganization?: string): Observable<any> {
     const headers: HttpHeaders = this.restUtil.getHeaders(selectedOrganization);
-    return this.http.get(`${this.listCardTypes}`, { headers: headers })
-        .map(this.restUtil.extractJSON)
-        .catch((error) => {
-            return this.restUtil.handleError(error);
-        });
+    return this.http.get(`${this.listCardTypes}`, { headers: headers }).pipe(
+      map(this.restUtil.extractJSON),
+      catch((error) => {
+        return this.restUtil.handleError(error);
+      })
+    );
+
   }
 }
