@@ -80,6 +80,10 @@ function EditOrder() {
         registerMethods(iframeConstants.EDIT_ORDER_SCREEN, iframeConstants.EDIT_ORDER_SCREEN_EVENT_PROCEED_TO_PAYMENT, functionRef, scope);
     }
 
+    Events.prototype.onAvailablePaymentOptionExpand = function (functionRef, scope) {
+        registerMethods(iframeConstants.EDIT_ORDER_SCREEN, iframeConstants.EDIT_ORDER_SCREEN_EVENT_EXPAND_AVAILABLE_PAYMENT_OPTION, functionRef, scope);
+    }
+
     Events.prototype.onPlaceOrder = function (functionRef, scope) {
         registerMethods(iframeConstants.EDIT_ORDER_SCREEN, iframeConstants.EDIT_ORDER_SCREEN_EVENT_PROCEED_TO_PLACE_ORDER, functionRef, scope);
     }
@@ -114,6 +118,10 @@ function EditOrder() {
 
     Events.prototype.onPaymentAccordianExpand = function(functionRef, scope) {
         registerMethods(iframeConstants.EDIT_ORDER_SCREEN, iframeConstants.PAYMENT_ACCORDIAN_EXPANDED, functionRef, scope);
+    }
+
+    Events.prototype.onAddCreditCardExpanded = function(functionRef, scope) {
+        registerMethods(iframeConstants.EDIT_ORDER_SCREEN, iframeConstants.CREDIT_CARD_ACCORDIAN_EXPANDED, functionRef, scope);
     }
     /* Actions */
 
@@ -444,14 +452,30 @@ function CreateReturn() {
     Events.prototype.doneClicked = function(functionRef, scope){
         registerMethods(iframeConstants.CREATE_RETURN_SCREEN, iframeConstants.CREATE_RETURN_SCREEN_EVENT_ON_DONE_CLICKED, functionRef, scope);
     }
+    Events.prototype.orderLoadOnProceedToReview = function(functionRef, scope){
+        registerMethods(iframeConstants.CREATE_RETURN_SCREEN, iframeConstants.CREATE_RETURN_PROCEED_TO_REVIEW_EVENT, functionRef, scope);
+    }
+    Events.prototype.onAvailablePaymentOptionExpand = function (functionRef, scope) {
+        registerMethods(iframeConstants.CREATE_RETURN_SCREEN, iframeConstants.CREATE_RETURN_EXPAND_AVAILABLE_PAYMENT_OPTION_EVENT, functionRef, scope);
+    }
     // Actions
     Actions.prototype.saveOrder = function (payload) {
         var receivedData = { screenId: iframeConstants.CREATE_RETURN_SCREEN, action: iframeConstants.CREATE_RETURN_SCREEN_ACTION_SAVE_ORDER, payload: payload };
         parent.window.postMessage({ receivedData }, '*')
     }
 
+    Actions.prototype.reloadPage = function (payload) {
+        var receivedData = { screenId: iframeConstants.CREATE_RETURN_SCREEN, action: iframeConstants.CREATE_RETURN_SCREEN_ACTION_RELOAD_PAGE, payload: payload };
+        parent.window.postMessage({ receivedData }, '*')
+    }
+
     Actions.prototype.ackConfirmOrder = function (payload) {
         var receivedData = { screenId: iframeConstants.CREATE_RETURN_SCREEN, action: iframeConstants.CREATE_RETURN_SCREEN_ACTION_ACK_CONFIRM_ORDER, payload: payload };
+        parent.window.postMessage({ receivedData }, '*')
+    }
+
+    Actions.prototype.ackProceedToReview = function (payload) {
+        var receivedData = { screenId: iframeConstants.CREATE_RETURN_SCREEN, action: iframeConstants.CREATE_RETURN_SCREEN_ACTION_ACK_PROCEED_TO_REVIEW, payload: payload };
         parent.window.postMessage({ receivedData }, '*')
     }
 
@@ -547,6 +571,26 @@ function Application() {
 }
 /******************************* Application: end *******************************/
 
+/******************************* IFRAME: start *******************************/
+function IFrame() {
+
+    // Actions
+    // This action is used to resize the iframe from iframe html reference window.frameElement used in extensions
+    // accepts parameter payload of Height and Width with the unit px or pc or rem or em
+    // Example - payload = {Height: '250px', Width: '250px'}
+    Actions.prototype.resizeIframe = function (payload) {
+        if(payload && window.frameElement){
+            if(payload.Width) window.frameElement.style.width = payload.Width;
+            if(payload.Height) window.frameElement.style.height = payload.Height;
+        }
+    }
+
+    function Actions() { }
+
+    this.actions = new Actions();
+}
+/******************************* IFRAME: end *******************************/
+
 /******************************* Window: start *******************************/
 function Window() {
 
@@ -554,6 +598,27 @@ function Window() {
     Actions.prototype.reloadURL = function (payload) {
         var receivedData = { screenId: iframeConstants.WINDOW, action: iframeConstants.WINDOW_RELOAD_URL, payload: payload };
         parent.window.postMessage({ receivedData }, '*')
+    }
+    /** Action to open a new window, its take url ,window type, height, width, top and left as payload.
+      Whenever user wants to display custom content in new child window or tab, can use this action. 
+     payload = {
+        "Url": 'assets/ui-extensions/examples/editOrder/hosted-checkout-window.html',
+        "WindowType": 'ChildWindow',
+        "Width": 500,
+        "Height": 600,
+        'WindowTop': 110,
+        'WindowLeft': 450
+    } */
+    Actions.prototype.openWindow = function (payload) {
+        var receivedData = { screenId: iframeConstants.WINDOW, action: iframeConstants.OPEN_WINDOW, payload: payload };
+        parent.window.postMessage({ receivedData }, '*')
+    }
+    /**Action to close the opned new window and refresh the DS UI.
+     * If user wnats to to close the custom window and refresh DS UI, can call this action on any event.  
+     */
+    Actions.prototype.closeAndRefresh = function (payload) {
+        var receivedData = { screenId: iframeConstants.WINDOW, action: iframeConstants.WINDOW_CLOSE_AND_REFRESH, payload: payload };
+        window.opener.postMessage({ receivedData }, '*')
     }
 
     function Actions() { }
@@ -567,7 +632,6 @@ var iframeConstants = new IframeConstants();
 var AppRoutes = new RouteConstants();
 
 function MAExtension() {
-    // console.log("sample-extensions-ma/assets/scripts/ma-extension-client.js is loaded");
     this.OrderStatusScreen = new OrderStatus();
     this.XOOrderStatusScreen = new XOOrderStatus();
     this.EditOrderScreen = new EditOrder();
@@ -582,6 +646,7 @@ function MAExtension() {
     this.PopupsScreen = new Popups();
     this.OverridePricePopupScreen = new OverridePricerPopup();
     this.Application = new Application();
+    this.IFrame = new IFrame();
     this.Window = new Window();
 }
 function registerMethods(screenId, eventId, functionRef, scope) {
@@ -639,6 +704,7 @@ function IframeConstants() {
     this.EDIT_ORDER_SCREEN_EVENT_ON_LOAD = "editOrderOnLoad";
     this.EDIT_ORDER_SCREEN_EVENT_PROCEED_TO_SUMMARY = "proceedToSummary";
     this.EDIT_ORDER_SCREEN_EVENT_PROCEED_TO_PAYMENT = "proceedToPayment";
+    this.EDIT_ORDER_SCREEN_EVENT_EXPAND_AVAILABLE_PAYMENT_OPTION = "onAvailablePaymentOptionExpand";
     this.EDIT_ORDER_SCREEN_EVENT_PROCEED_TO_PLACE_ORDER = "placeOrder";
     this.EDIT_ORDER_SCREEN_EVENT_PROCEED_TO_CONFIRM_ORDER = "confirmOrder";
     this.EDIT_ORDER_SCREEN_EVENT_SHIPPING_TAB_SELECTED = "shippingTabSelected";
@@ -658,6 +724,7 @@ function IframeConstants() {
     this.EDIT_ORDER_SCREEN_ACTION_ClOSE_ADDRESS = 'CloseAddress';
     this.PAYMENT_ACCORDIAN_EXPANDED = 'OnPaymentAccordianExpanded';
     this.PAYMENT_LOAD = 'OnPaymentLoad';
+    this.CREDIT_CARD_ACCORDIAN_EXPANDED = 'onAddCreditCardExpanded';
     //edit order screen constants : END
 
     //item search constants : START    
@@ -724,6 +791,8 @@ function IframeConstants() {
     this.CREATE_RETURN_SCREEN_EVENT_ADDRESS_PANEL_LOADED = 'onAddressPanelLoaded';
     this.CREATE_RETURN_SCREEN_ACTION_SAVE_ORDER = 'SaveOrder';
     this.CREATE_RETURN_SCREEN_ACTION_ACK_CONFIRM_ORDER = 'AckConfirmOrder';
+    this.CREATE_RETURN_SCREEN_ACTION_ACK_PROCEED_TO_REVIEW = 'AckProceedToReview';
+    this.CREATE_RETURN_SCREEN_ACTION_RELOAD_PAGE = 'ReloadPage';
     this.CREATE_RETURN_SCREEN_ACTION_SAVE_ADDRESS = 'SaveAddress';
     this.CREATE_RETURN_SCREEN_ACTION_UPDATE_SHIP_TO_ADDRESS = 'UpdateShipToAddress';
     this.CREATE_RETURN_SCREEN_ACTION_UPDATE_RETURN_FROM_ADDRESS = 'UpdateReturnFromAddress';
@@ -733,6 +802,8 @@ function IframeConstants() {
     this.CREATE_RETURN_SCREEN_ACTION_RETURN_CREATED = 'ReturnCreated';
     this.RETURN_TYPE_CHANGE_EVENT = 'ReturnTypeChangeEvent';
     this.CREATE_RETURN_SCREEN_EVENT_ON_DONE_CLICKED = "DoneClicked";
+    this.CREATE_RETURN_PROCEED_TO_REVIEW_EVENT = 'orderLoadOnProceedToReview';
+    this.CREATE_RETURN_EXPAND_AVAILABLE_PAYMENT_OPTION_EVENT = "onAvailablePaymentOptionExpand";
     //Create Return screen constants : END
 
     //Popups screen constants : START
@@ -746,12 +817,20 @@ function IframeConstants() {
     //Window constants : START
     this.WINDOW = 'Window'
     this.WINDOW_RELOAD_URL = 'ReloadURL';
+    this.OPEN_WINDOW = 'OpenWindow';
+    this.WINDOW_CLOSE_AND_REFRESH= 'CloseAndRefresh';
     //Window constants : END
 
     //Application constants : START
     this.APPLICATION = 'Application'
     this.APPLICATION_ROUTE = 'Route';
     //Application constants : END
+
+    
+    //IFRAME constants : START
+    this.IFRAME = 'IFrame'
+    this.IFRAME_RESIZE = 'resizeIframe';
+    //IFRAME constants : END
 }
 
 function RouteConstants() {
