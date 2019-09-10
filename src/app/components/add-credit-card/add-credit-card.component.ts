@@ -1,3 +1,4 @@
+import { PaymentService } from './../../services/payment.service';
 import { Address } from './../../models/address.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -18,8 +19,10 @@ export class AddCreditCardComponent implements OnInit {
   paymentType;
   address = new Address();
   isSameAsShipping: boolean;
+  cardTypes: [];
 
-  constructor( private route: ActivatedRoute) {
+  constructor( private route: ActivatedRoute,
+    private paymentService: PaymentService) {
     this.route.queryParams.subscribe(params => {
       if (params['selectedOrganization']) {
         this.selectedOrganization = params['selectedOrganization'];
@@ -33,6 +36,11 @@ export class AddCreditCardComponent implements OnInit {
     if ((<any>window).MAExtension) {
       (<any>window).MAExtension.EditOrderScreen.events.onAddCreditCardExpanded(this.psoAddCreditCardExpandMethod.bind(this));
     }
+    this.paymentService.getCardTypes(this.selectedOrganization).subscribe(res => {
+      if (res && res.data) {
+        this.cardTypes = res.data;
+      }
+    });
   }
 
   psoAddCreditCardExpandMethod(data) {
