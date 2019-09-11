@@ -170,6 +170,11 @@ function EditOrder() {
         parent.window.postMessage({ receivedData }, '*');
     }
 
+    Actions.prototype.addCreditCardInfo = function (payload) {
+        var receivedData = { screenId: iframeConstants.EDIT_ORDER_SCREEN, action: iframeConstants.ADD_CREDIT_CARD_INFO_ACTION, payload: payload};
+        parent.window.postMessage({ receivedData }, '*');
+    }
+
     function Events() { }
 
     function Actions() { }
@@ -725,6 +730,7 @@ function IframeConstants() {
     this.PAYMENT_ACCORDIAN_EXPANDED = 'OnPaymentAccordianExpanded';
     this.PAYMENT_LOAD = 'OnPaymentLoad';
     this.CREDIT_CARD_ACCORDIAN_EXPANDED = 'onAddCreditCardExpanded';
+    this.ADD_CREDIT_CARD_INFO_ACTION = 'addCreditCardInfo';
     //edit order screen constants : END
 
     //item search constants : START    

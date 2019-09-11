@@ -19,7 +19,69 @@ export class AddCreditCardComponent implements OnInit {
   paymentType;
   address = new Address();
   isSameAsShipping: boolean;
-  cardTypes: [];
+  cardType = 'Visa';
+  gatewayInfo = {
+		"Messages": null,
+		"ProfileId": "ecomorg",
+		"PerformsStandaloneRefunds": true,
+		"UpdatedTimestamp": "2019-07-03T05:05:41.365",
+		"Account": [],
+		"CreatedBy": "admin@ecomorg.com",
+		"CreatedTimestamp": "2019-07-03T05:05:41.365",
+		"Actions": {},
+		"Extended": {},
+		"GatewayId": "Simulator",
+		"GatewayAttribute": [{
+			"Actions": {},
+			"PK": "1724239562130341366",
+			"CreatedBy": "admin@ecomorg.com",
+			"CreatedTimestamp": "2019-07-03T05:05:41.367",
+			"UpdatedBy": "admin@ecomorg.com",
+			"UpdatedTimestamp": "2019-07-03T05:05:41.367",
+			"Messages": null,
+			"ProfileId": "ecomorg",
+			"ParentGateway": {
+				"PK": "9072238562130341365"
+			},
+			"Name": "TOKEN_WINDOW_HEIGHT",
+			"Value": "280",
+			"Extended": {}
+		}, {
+			"Actions": {},
+			"PK": "2839240562130341368",
+			"CreatedBy": "admin@ecomorg.com",
+			"CreatedTimestamp": "2019-07-03T05:05:41.369",
+			"UpdatedBy": "admin@ecomorg.com",
+			"UpdatedTimestamp": "2019-07-03T05:05:41.369",
+			"Messages": null,
+			"ProfileId": "ecomorg",
+			"ParentGateway": {
+				"PK": "9072238562130341365"
+			},
+			"Name": "TOKEN_WINDOW_WIDTH",
+			"Value": "360",
+			"Extended": {}
+		}, {
+			"Actions": {},
+			"PK": "4915241562130341369",
+			"CreatedBy": "admin@ecomorg.com",
+			"CreatedTimestamp": "2019-07-03T05:05:41.369",
+			"UpdatedBy": "admin@ecomorg.com",
+			"UpdatedTimestamp": "2019-07-03T05:05:41.369",
+			"Messages": null,
+			"ProfileId": "ecomorg",
+			"ParentGateway": {
+				"PK": "9072238562130341365"
+			},
+			"Name": "TOKEN_USE_HTTPS",
+			"Value": "false",
+			"Extended": {}
+		}],
+		"UpdatedBy": "admin@ecomorg.com",
+		"GatewayEncryptedAttribute": [],
+		"PK": "9072238562130341365",
+		"IsBase": true
+	};
 
   constructor( private route: ActivatedRoute,
     private paymentService: PaymentService) {
@@ -36,11 +98,7 @@ export class AddCreditCardComponent implements OnInit {
     if ((<any>window).MAExtension) {
       (<any>window).MAExtension.EditOrderScreen.events.onAddCreditCardExpanded(this.psoAddCreditCardExpandMethod.bind(this));
     }
-    this.paymentService.getCardTypes(this.selectedOrganization).subscribe(res => {
-      if (res && res.data) {
-        this.cardTypes = res.data;
-      }
-    });
+ 
   }
 
   psoAddCreditCardExpandMethod(data) {
@@ -71,6 +129,14 @@ export class AddCreditCardComponent implements OnInit {
     if (this.isSameAsShipping && this.shippingAddress) {
       this.fillFullAddress(this.shippingAddress);
     }
+  }
+
+  addCardInfo() {
+    const payload = {};
+    payload['BillingAddress']= this.address;
+    payload['GatewayInfo']= this.gatewayInfo;
+    payload['CardType']= this.cardType;
+    (<any>window).MAExtension.EditOrderScreen.actions.addCreditCardInfo(payload);
   }
 
 }
