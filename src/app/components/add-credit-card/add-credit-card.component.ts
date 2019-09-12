@@ -135,7 +135,7 @@ export class AddCreditCardComponent implements OnInit {
     const payload = {};
     payload['BillingAddress']= this.address;
     payload['GatewayInfo']= this.gatewayInfo;
-    payload['CardType']= this.cardType;
+    payload['CardTypeId']= this.cardType;
     (<any>window).MAExtension.EditOrderScreen.actions.addCreditCardInfo(payload);
   }
 
