@@ -111,6 +111,14 @@ export class AddCreditCardComponent implements OnInit {
     }
   }
 
+  addCardInfo() {
+    const payload = {};
+    payload['BillingAddress']= this.address;
+    payload['GatewayInfo']= this.gatewayInfo;
+    payload['CardTypeId']= this.cardType;
+    (<any>window).MAExtension.EditOrderScreen.actions.addCreditCardInfo(payload);
+  }
+
   fillFullAddress(saveAddress: any) {
     this.address.FirstName = saveAddress.FirstName;
     this.address.LastName = saveAddress.LastName;
@@ -131,12 +139,6 @@ export class AddCreditCardComponent implements OnInit {
     }
   }
 
-  addCardInfo() {
-    const payload = {};
-    payload['BillingAddress']= this.address;
-    payload['GatewayInfo']= this.gatewayInfo;
-    payload['CardTypeId']= this.cardType;
-    (<any>window).MAExtension.EditOrderScreen.actions.addCreditCardInfo(payload);
-  }
+
 
 }
