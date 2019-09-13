@@ -13,7 +13,7 @@ export class AvailableCustomPaymentComponent implements OnInit {
   loggedInUser;
   orderId;
   order;
-  accountNo;
+  ccountNo;
   Amount;paymentHeader;
 
   constructor( private route: ActivatedRoute,
@@ -39,12 +39,14 @@ export class AvailableCustomPaymentComponent implements OnInit {
       const payload = data.payload;
       this.order = payload['Order'];
       this.paymentHeader = payload['PaymentHeader'];
+      this.order = payload['Order'];
+      console.log(this.order);
+      console.log(this.paymentHeader);
     }
   }
 
   addCardInfo() {
-    const payload = {};
-    // (<any>window).MAExtension.EditOrderScreen.actions.addCreditCardInfo(payload);
+    // call save API
   }
 
 }
