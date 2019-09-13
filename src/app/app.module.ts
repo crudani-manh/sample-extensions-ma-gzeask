@@ -20,6 +20,7 @@ import { ExampleComponent } from './components/example/example.component';
 import { CustomerSearchComponent } from './components/customer-search/customer-search.component';
 import { ShipmentTabComponent } from './components/shipment-tab/shipment-tab.component';
 import { AddCreditCardComponent } from './components/add-credit-card/add-credit-card.component';
+import { AvailableCustomPaymentComponent } from './components/available-custom-payment/available-custom-payment.component';
 
 export const sampleIframeExtns = [    
   RecComponent, 
@@ -46,7 +47,7 @@ export const sampleIframeExtns = [
   ],
   declarations: [ 
     AppComponent, RootComponent, 
-    ...sampleIframeExtns, ShipmentTabComponent
+    ...sampleIframeExtns, ShipmentTabComponent, AvailableCustomPaymentComponent
   ],
   bootstrap: [ AppComponent ],
   entryComponents: [ RootComponent,

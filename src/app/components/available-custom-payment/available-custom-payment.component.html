@@ -1,0 +1,9 @@
+<form #availablePaymentForm="ngForm">
+  <div class="field-in-row">
+    <mat-form-field>
+      <input matInput [(ngModel)]="accountNo" name="accountNo" maxlength="100" #firstName="ngModel" autocomplete="nope" required
+        placeholder="{{'Account Number'}}">
+    </mat-form-field>
+  </div>
+  <button type="button" (click)="addCardInfo()">ADD</button>
+</form>
