@@ -1,3 +1,4 @@
+import { AvailableCustomPaymentComponent } from './components/available-custom-payment/available-custom-payment.component';
 import { Routes } from '@angular/router'
 import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
@@ -71,5 +72,10 @@ export const APP_ROUTES: Routes = [
     path: 'addCreditCard',
     component: AddCreditCardComponent,
     data: {title: 'AddCreditCard'}
+  },
+  {
+    path: 'customPay',
+    component: AvailableCustomPaymentComponent,
+    data: {title: 'AvailableCustomPaymentComponent'}
   }
 ];
